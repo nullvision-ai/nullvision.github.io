@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nullvision — briefing de projeto</title>
+<meta name="description" content="Conte sua ideia. A nullvision renderiza. Envie o briefing do seu projeto cinematic, motion ou design.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #0a0a0a;
+    color: #e8e4dc;
+    font-family: 'Space Grotesk', Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+  /* HEADER */
+  header {
+    border-bottom: 0.5px solid #1e1e1e;
+    padding: 22px 0;
+  }
+  .header-inner { display: flex; justify-content: space-between; align-items: center; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark { flex-shrink: 0; }
+  .wordmark { font-size: 20px; letter-spacing: 0.1em; font-weight: 400; }
+  .wordmark span { color: #c0392b; }
+  .tagline-mini { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.14em; color: #555; margin-top: 2px; }
+  .nav-mono { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #444; text-transform: uppercase; }
+
+  /* HERO */
+  .hero { padding: 90px 0 60px; text-align: left; }
+  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #c0392b; text-transform: uppercase; margin-bottom: 20px; }
+  .hero h1 { font-size: 44px; font-weight: 300; letter-spacing: 0.01em; line-height: 1.15; max-width: 640px; }
+  .hero h1 strong { font-weight: 500; }
+  .hero p { margin-top: 22px; font-size: 15px; color: #999; max-width: 480px; }
+  .hero-cta { margin-top: 34px; }
+  .btn-scroll {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #c0392b; color: #fff; border: none;
+    font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.1em;
+    padding: 14px 26px; border-radius: 30px; cursor: pointer; text-decoration: none;
+    transition: opacity .15s ease;
+  }
+  .btn-scroll:hover { opacity: 0.85; }
+
+  /* SECTION GENERIC */
+  section { padding: 56px 0; border-bottom: 0.5px solid #1e1e1e; }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #444; text-transform: uppercase; margin-bottom: 28px; }
+  .section-title { font-size: 26px; font-weight: 400; margin-bottom: 10px; }
+  .section-sub { color: #888; font-size: 13px; max-width: 520px; margin-bottom: 34px; }
+
+  /* CATEGORY CARDS */
+  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 700px) { .cat-grid { grid-template-columns: 1fr; } }
+  .cat-card {
+    background: #111; border: 1px solid #1e1e1e; border-radius: 12px;
+    padding: 24px 20px; cursor: pointer; text-align: left;
+    transition: border-color .15s ease, background .15s ease, transform .15s ease;
+  }
+  .cat-card:hover { border-color: #333; transform: translateY(-2px); }
+  .cat-card.active { border-color: #c0392b; background: #161010; }
+  .cat-dot { width: 9px; height: 9px; border-radius: 50%; margin-bottom: 14px; }
+  .cat-card-name { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; margin-bottom: 10px; }
+  .cat-card-desc { font-size: 12px; color: #777; line-height: 1.6; }
+  .cat-check { float: right; font-size: 14px; color: #c0392b; opacity: 0; transition: opacity .15s ease; }
+  .cat-card.active .cat-check { opacity: 1; }
+
+  /* FORM */
+  #form-area { display: none; }
+  #form-area.visible { display: block; }
+  .field-group { margin-bottom: 26px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+  label {
+    display: block; font-size: 12px; color: #bbb; margin-bottom: 8px; letter-spacing: 0.01em;
+  }
+  label .opt { color: #555; font-size: 10px; font-family: 'Space Mono', monospace; margin-left: 6px; text-transform: uppercase; }
+  label .req { color: #c0392b; margin-left: 4px; }
+  input[type=text], input[type=email], input[type=tel], input[type=date], select, textarea {
+    width: 100%;
+    background: #111;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: #e8e4dc;
+    font-family: 'Space Grotesk', Arial, sans-serif;
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color .15s ease;
+  }
+  input:focus, select:focus, textarea:focus { border-color: #c0392b; }
+  textarea { min-height: 90px; resize: vertical; }
+  select { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, #666 50%), linear-gradient(135deg, #666 50%, transparent 50%); background-position: calc(100% - 20px) center, calc(100% - 15px) center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; }
+  ::placeholder { color: #444; }
+
+  .radio-group, .check-group { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pill-option {
+    border: 1px solid #262626; border-radius: 20px; padding: 9px 16px;
+    font-size: 12px; color: #999; cursor: pointer; user-select: none;
+    transition: all .15s ease;
+  }
+  .pill-option input { display: none; }
+  .pill-option.selected { border-color: #c0392b; color: #e8e4dc; background: #161010; }
+
+  .section-block-title {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
+    color: #c0392b; text-transform: uppercase; margin: 34px 0 18px;
+    border-bottom: 0.5px solid #1e1e1e; padding-bottom: 8px;
+  }
+  .section-block-title:first-of-type { margin-top: 6px; }
+
+  .helper { font-size: 11px; color: #555; margin-top: 6px; }
+
+  /* SUBMIT */
+  .submit-row { margin-top: 44px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .btn-submit {
+    background: #c0392b; color: #fff; border: none; border-radius: 30px;
+    font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.1em;
+    padding: 15px 32px; cursor: pointer; transition: opacity .15s ease;
+  }
+  .btn-submit:hover { opacity: 0.85; }
+  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+  .submit-note { font-size: 11px; color: #555; }
+
+  /* STATE MESSAGES */
+  #status-msg { display: none; margin-top: 24px; padding: 16px 20px; border-radius: 8px; font-size: 13px; }
+  #status-msg.success { display: block; background: #0f1c14; border: 1px solid #1e4a2c; color: #8fd6a5; }
+  #status-msg.error { display: block; background: #1f1010; border: 1px solid #4a1e1e; color: #e08888; }
+
+  .success-screen { display: none; text-align: center; padding: 60px 0; }
+  .success-screen.visible { display: block; }
+  .success-screen .cat-dot { margin: 0 auto 20px; width: 14px; height: 14px; }
+  .success-screen h2 { font-size: 28px; font-weight: 400; margin-bottom: 14px; }
+  .success-screen p { color: #999; font-size: 14px; max-width: 420px; margin: 0 auto; }
+
+  footer {
+    padding: 40px 0 60px; text-align: center;
+  }
+  footer .wordmark-sm { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #555; }
+  footer .wordmark-sm span { color: #c0392b; }
+
+  /* honeypot */
+  .hp { position: absolute; left: -9999px; opacity: 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <svg class="logo-mark" width="30" height="30" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="28" cy="28" r="22" stroke="#2a2a2a" stroke-width="0.8"/>
+        <circle cx="28" cy="28" r="14" stroke="#3a3a3a" stroke-width="0.8"/>
+        <circle cx="28" cy="28" r="6" fill="#c0392b"/>
+        <line x1="28" y1="6" x2="28" y2="14" stroke="#c0392b" stroke-width="1.2"/>
+        <line x1="28" y1="42" x2="28" y2="50" stroke="#c0392b" stroke-width="1.2"/>
+        <line x1="6" y1="28" x2="14" y2="28" stroke="#c0392b" stroke-width="1.2"/>
+        <line x1="42" y1="28" x2="50" y2="28" stroke="#c0392b" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <div class="wordmark">null<span>vision</span></div>
+        <div class="tagline-mini">we render what you imagine</div>
+      </div>
+    </div>
+    <div class="nav-mono">Briefing de projeto</div>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <div class="hero-eyebrow">◉ Novo projeto</div>
+  <h1>Conte sua ideia.<br><strong>A gente renderiza.</strong></h1>
+  <p>Escolha a categoria do seu projeto, preencha o que souber (o resto é opcional — pode escrever livre), e a nullvision entra em contato pra dar início.</p>
+  <div class="hero-cta">
+    <a href="#categorias" class="btn-scroll">começar briefing ↓</a>
+  </div>
+</div>
+
+<section id="categorias">
+  <div class="wrap">
+    <div class="section-label">01 — Categoria</div>
+    <h2 class="section-title">Qual é o seu projeto?</h2>
+    <p class="section-sub">Cada categoria tem seu próprio formulário — clique na que combina com o que você tem em mente. Na dúvida, escolha a mais próxima; a gente ajusta juntos.</p>
+
+    <div class="cat-grid">
+      <div class="cat-card" data-cat="cinematic">
+        <span class="cat-check">✓</span>
+        <div class="cat-dot" style="background:#c0392b;"></div>
+        <div class="cat-card-name">◉ CINEMATIC</div>
+        <div class="cat-card-desc">Takes dramáticos, retratos, atmosfera cinematográfica. Live action gerado por IA — parece filmado de verdade.</div>
+      </div>
+      <div class="cat-card" data-cat="motion">
+        <span class="cat-check">✓</span>
+        <div class="cat-dot" style="background:#888;"></div>
+        <div class="cat-card-name">◉ MOTION</div>
+        <div class="cat-card-desc">Animações gráficas, logo animado, type motion. Forte para reforço de marca e produto em movimento.</div>
+      </div>
+      <div class="cat-card" data-cat="design">
+        <span class="cat-check">✓</span>
+        <div class="cat-dot" style="background:#e8e4dc;"></div>
+        <div class="cat-card-name">◉ DESIGN</div>
+        <div class="cat-card-desc">Apresentações, slides, motion graphics institucional, mockups e documentos — produzidos no Claude Design.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="form-section" style="display:none;">
+  <div class="wrap">
+    <div class="section-label">02 — Briefing</div>
+    <h2 class="section-title" id="form-title">Sobre o projeto</h2>
+    <p class="section-sub">Quanto mais completo, mais rápido e preciso é o resultado — mas só o nome e o e-mail são obrigatórios. O resto, preencha o que souber ou escreva livre.</p>
+
+    <form id="briefing-form" action="https://formspree.io/f/mgaevrln" method="POST">
+      <input type="hidden" name="_subject" id="f-subject" value="Novo briefing — nullvision">
+      <input type="hidden" name="categoria" id="f-categoria" value="">
+      <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
+
+      <div class="section-block-title">Sobre você e o projeto</div>
+      <div class="field-row field-group">
+        <div>
+          <label>Seu nome <span class="req">*</span></label>
+          <input type="text" name="nome" required placeholder="Como podemos te chamar">
+        </div>
+        <div>
+          <label>E-mail <span class="req">*</span></label>
+          <input type="email" name="email" required placeholder="voce@empresa.com">
+        </div>
+      </div>
+      <div class="field-row field-group">
+        <div>
+          <label>WhatsApp / telefone <span class="opt">opcional</span></label>
+          <input type="tel" name="whatsapp" placeholder="(00) 00000-0000">
+        </div>
+        <div>
+          <label>Nome do projeto / marca <span class="opt">opcional</span></label>
+          <input type="text" name="projeto" placeholder="Ex: lançamento tênis X, ou 'orgânico nullvision'">
+        </div>
+      </div>
+      <div class="field-row field-group">
+        <div>
+          <label>Prazo desejado de entrega <span class="opt">opcional</span></label>
+          <input type="date" name="prazo_entrega">
+        </div>
+        <div>
+          <label>Data de publicação / apresentação <span class="opt">opcional</span></label>
+          <input type="date" name="data_publicacao">
+        </div>
+      </div>
+
+      <!-- CINEMATIC -->
+      <div class="cat-fields" data-cat="cinematic">
+        <div class="section-block-title">Sobre o vídeo — cinematic</div>
+        <div class="field-group">
+          <label>O que esse vídeo precisa comunicar? <span class="opt">opcional</span></label>
+          <textarea name="cinematic_objetivo" placeholder="Em uma frase: o que você quer que quem assistir sinta ou entenda"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Público e onde vai rodar <span class="opt">opcional</span></label>
+          <input type="text" name="cinematic_publico" placeholder="Ex: Reels, TikTok, YouTube, apresentação interna">
+        </div>
+        <div class="field-group">
+          <label>Cena, atmosfera e referências <span class="opt">opcional — pode escrever livre</span></label>
+          <textarea name="cinematic_cena" placeholder="Tipo de cena (retrato, produto, paisagem...), paleta de luz/cor, links de referência"></textarea>
+        </div>
+        <div class="field-row field-group">
+          <div>
+            <label>Duração aproximada <span class="opt">opcional</span></label>
+            <select name="cinematic_duracao">
+              <option value="">Selecione</option>
+              <option>Até 15 segundos</option>
+              <option>15–30 segundos</option>
+              <option>30–60 segundos</option>
+              <option>Acima de 60 segundos</option>
+            </select>
+          </div>
+          <div>
+            <label>Proporção <span class="opt">opcional</span></label>
+            <select name="cinematic_proporcao">
+              <option value="">Selecione</option>
+              <option>9:16 (Reels/Stories)</option>
+              <option>1:1 (feed)</option>
+              <option>16:9 (YouTube/apresentação)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Tem pessoas/rostos gerados por IA, ou marcas de terceiros aparecem no vídeo? <span class="opt">opcional</span></label>
+          <textarea name="cinematic_pessoas_marcas" placeholder="Isso importa por causa de autorização de imagem/uso de marca — se não souber, deixe em branco que perguntamos depois"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Áudio <span class="opt">opcional</span></label>
+          <input type="text" name="cinematic_audio" placeholder="Trilha/narração definida, ou 'nullvision escolhe'">
+        </div>
+      </div>
+
+      <!-- MOTION -->
+      <div class="cat-fields" data-cat="motion">
+        <div class="section-block-title">Sobre a peça — motion</div>
+        <div class="field-group">
+          <label>O que essa animação precisa comunicar? <span class="opt">opcional</span></label>
+          <textarea name="motion_objetivo" placeholder="Lançamento, reforço de marca, abertura de vídeo, transição..."></textarea>
+        </div>
+        <div class="field-group">
+          <label>Onde vai rodar <span class="opt">opcional</span></label>
+          <input type="text" name="motion_onde" placeholder="Feed, Stories, abertura de vídeo maior, site...">
+        </div>
+        <div class="field-group">
+          <label>Logo, paleta de cores e tipografia da marca <span class="opt">opcional</span></label>
+          <textarea name="motion_marca" placeholder="Descreva ou cole os hex de cor. Se tiver arquivo de logo (vetor/PNG transparente), envie por e-mail depois de mandar este briefing"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Texto exato que deve aparecer na tela <span class="opt">opcional</span></label>
+          <textarea name="motion_texto" placeholder="Headline, subtítulo, CTA — texto errado é o maior motivo de retrabalho em motion"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Estilo de animação e referências <span class="opt">opcional</span></label>
+          <textarea name="motion_estilo" placeholder="2D geométrico, 3D, orgânico/fluido, glitch... links de referência"></textarea>
+        </div>
+        <div class="field-row field-group">
+          <div>
+            <label>Duração aproximada <span class="opt">opcional</span></label>
+            <select name="motion_duracao">
+              <option value="">Selecione</option>
+              <option>Até 15 segundos</option>
+              <option>15–30 segundos</option>
+              <option>30–60 segundos</option>
+              <option>Acima de 60 segundos</option>
+            </select>
+          </div>
+          <div>
+            <label>Precisa ser loop perfeito? <span class="opt">opcional</span></label>
+            <select name="motion_loop">
+              <option value="">Selecione</option>
+              <option>Sim, loop</option>
+              <option>Não, início e fim fixos</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESIGN -->
+      <div class="cat-fields" data-cat="design">
+        <div class="section-block-title">Sobre o material — design</div>
+        <div class="field-group">
+          <label>Tipo de entregável <span class="opt">opcional</span></label>
+          <select name="design_tipo">
+            <option value="">Selecione</option>
+            <option>Apresentação / deck de slides</option>
+            <option>Motion graphics institucional</option>
+            <option>Mockup / protótipo interativo</option>
+            <option>One-pager</option>
+            <option>Documento institucional</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Objetivo e mensagens-chave <span class="opt">opcional — o mais importante desse briefing</span></label>
+          <textarea name="design_objetivo" placeholder="Por que esse material existe, e 3 a 5 mensagens que precisam estar nele"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Público-alvo <span class="opt">opcional</span></label>
+          <input type="text" name="design_publico" placeholder="Board, investidor, cliente final, equipe interna...">
+        </div>
+        <div class="field-group">
+          <label>Estrutura de conteúdo <span class="opt">opcional</span></label>
+          <textarea name="design_estrutura" placeholder="Nº aproximado de slides/páginas e tópicos que precisam ser cobertos"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Dados e gráficos <span class="opt">opcional</span></label>
+          <textarea name="design_dados" placeholder="Precisa de visualização de dados? Descreva — se tiver planilha, envie por e-mail depois deste briefing"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Identidade visual a usar <span class="opt">opcional</span></label>
+          <select name="design_identidade">
+            <option value="">Selecione</option>
+            <option>Identidade da nullvision</option>
+            <option>Minha marca (vou enviar logo/cores/fontes)</option>
+            <option>Co-branded (nullvision + minha marca)</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Formato de exportação final <span class="opt">opcional</span></label>
+          <div class="check-group" id="design-formatos">
+            <label class="pill-option"><input type="checkbox" name="design_formato" value="HTML interativo"><span>HTML interativo</span></label>
+            <label class="pill-option"><input type="checkbox" name="design_formato" value="PPTX"><span>PPTX</span></label>
+            <label class="pill-option"><input type="checkbox" name="design_formato" value="PDF"><span>PDF</span></label>
+            <label class="pill-option"><input type="checkbox" name="design_formato" value="Canva"><span>Canva</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block-title">Pra fechar</div>
+      <div class="field-group">
+        <label>Quantas rodadas de revisão você espera? <span class="opt">opcional</span></label>
+        <input type="text" name="revisoes" placeholder="Ex: 2 rodadas">
+      </div>
+      <div class="field-group">
+        <label>Mais alguma coisa que a gente deveria saber? <span class="opt">opcional — fique à vontade pra escrever livre</span></label>
+        <textarea name="observacoes" placeholder="Ideias soltas, inspirações, restrições, o que quiser"></textarea>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-submit" id="submit-btn">enviar briefing →</button>
+        <span class="submit-note">Você recebe uma confirmação aqui na tela assim que enviar.</span>
+      </div>
+      <div id="status-msg"></div>
+    </form>
+
+    <div class="success-screen" id="success-screen">
+      <div class="cat-dot" style="background:#c0392b;"></div>
+      <h2>Briefing recebido.</h2>
+      <p>Obrigado! A nullvision já recebeu seu projeto e vai entrar em contato em breve pelo e-mail ou WhatsApp informado. ◉ we render what you imagine.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wordmark-sm">null<span>vision</span> — we render what you imagine.</div>
+</footer>
+
+<script>
+  const catCards = document.querySelectorAll('.cat-card');
+  const formSection = document.getElementById('form-section');
+  const catFieldGroups = document.querySelectorAll('.cat-fields');
+  const catLabels = { cinematic: 'Cinematic', motion: 'Motion', design: 'Design' };
+  const formTitle = document.getElementById('form-title');
+  const fCategoria = document.getElementById('f-categoria');
+  const fSubject = document.getElementById('f-subject');
+  const projetoInput = document.querySelector('input[name="projeto"]');
+
+  catCards.forEach(card => {
+    card.addEventListener('click', () => {
+      catCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      const cat = card.dataset.cat;
+      fCategoria.value = catLabels[cat];
+      formTitle.textContent = 'Sobre o projeto — ' + catLabels[cat];
+
+      catFieldGroups.forEach(group => {
+        group.style.display = (group.dataset.cat === cat) ? 'block' : 'none';
+      });
+
+      formSection.style.display = 'block';
+      setTimeout(() => {
+        formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    });
+  });
+
+  document.querySelectorAll('#design-formatos .pill-option').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const input = pill.querySelector('input');
+      input.checked = !input.checked;
+      pill.classList.toggle('selected', input.checked);
+    });
+  });
+
+  const form = document.getElementById('briefing-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const statusMsg = document.getElementById('status-msg');
+  const successScreen = document.getElementById('success-screen');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const projetoName = projetoInput.value.trim() || 'sem nome';
+    fSubject.value = 'Novo briefing — ' + fCategoria.value + ' — ' + projetoName;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'enviando...';
+    statusMsg.className = '';
+    statusMsg.style.display = 'none';
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        successScreen.classList.add('visible');
+        successScreen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        throw new Error('submit failed');
+      }
+    } catch (err) {
+      statusMsg.textContent = 'Não conseguimos enviar automaticamente. Manda esse briefing direto pra contato.mateusaraujom@gmail.com, por favor — desculpa o transtorno.';
+      statusMsg.className = 'error';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'enviar briefing →';
+    }
+  });
+</script>
+
+</body>
+</html>
