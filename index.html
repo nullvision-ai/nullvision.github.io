@@ -136,11 +136,18 @@
   #status-msg.success { display: block; background: #0f1c14; border: 1px solid #1e4a2c; color: #8fd6a5; }
   #status-msg.error { display: block; background: #1f1010; border: 1px solid #4a1e1e; color: #e08888; }
 
-  .success-screen { display: none; text-align: center; padding: 60px 0; }
-  .success-screen.visible { display: block; }
-  .success-screen .cat-dot { margin: 0 auto 20px; width: 14px; height: 14px; }
-  .success-screen h2 { font-size: 28px; font-weight: 600; margin-bottom: 14px; }
+  .success-screen {
+    display: none;
+    position: fixed; inset: 0; z-index: 999;
+    background: #0a0a0a;
+    text-align: center; padding: 24px;
+    flex-direction: column; align-items: center; justify-content: center;
+  }
+  .success-screen.visible { display: flex; }
+  .success-screen .cat-dot { margin: 0 auto 24px; width: 16px; height: 16px; }
+  .success-screen h2 { font-size: 30px; font-weight: 600; margin-bottom: 16px; color: #e8e4dc; }
   .success-screen p { color: #999; font-size: 14px; max-width: 420px; margin: 0 auto; }
+  .success-screen p.success-tag { margin-top: 18px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #c0392b; }
 
   footer {
     padding: 40px 0 60px; text-align: center;
@@ -433,18 +440,19 @@
       </div>
       <div id="status-msg"></div>
     </form>
-
-    <div class="success-screen" id="success-screen">
-      <div class="cat-dot" style="background:#c0392b;"></div>
-      <h2>Briefing recebido.</h2>
-      <p>Obrigado! A nullvision já recebeu seu projeto e vai entrar em contato em breve pelo e-mail ou WhatsApp informado. ◉ we render what you imagine.</p>
-    </div>
   </div>
 </section>
 
 <footer>
   <div class="wordmark-sm">null<span>vision</span> — we render what you imagine.</div>
 </footer>
+
+<div class="success-screen" id="success-screen">
+  <div class="cat-dot" style="background:#c0392b;"></div>
+  <h2>Briefing recebido.</h2>
+  <p>Obrigado! A nullvision já recebeu seu projeto e vai entrar em contato em breve pelo e-mail ou WhatsApp informado.</p>
+  <p class="success-tag">◉ we render what you imagine.</p>
+</div>
 
 <script>
   const catCards = document.querySelectorAll('.cat-card');
@@ -455,12 +463,14 @@
   const fCategoria = document.getElementById('f-categoria');
   const fSubject = document.getElementById('f-subject');
   const projetoInput = document.querySelector('input[name="projeto"]');
+  let selectedCat = null;
 
   catCards.forEach(card => {
     card.addEventListener('click', () => {
       catCards.forEach(c => c.classList.remove('active'));
       card.classList.add('active');
       const cat = card.dataset.cat;
+      selectedCat = cat;
       fCategoria.value = catLabels[cat];
       formTitle.textContent = 'Sobre o projeto — ' + catLabels[cat];
 
@@ -501,6 +511,19 @@
 
     try {
       const formData = new FormData(form);
+      const allPrefixes = ['cinematic_', 'motion_', 'design_'];
+      const otherPrefixes = allPrefixes.filter(p => p !== selectedCat + '_');
+      Array.from(formData.keys()).forEach(key => {
+        if (otherPrefixes.some(p => key.startsWith(p))) {
+          formData.delete(key);
+          return;
+        }
+        const val = formData.get(key);
+        if (typeof val === 'string' && val.trim() === '' && key !== '_subject' && key !== 'categoria') {
+          formData.delete(key);
+        }
+      });
+
       const response = await fetch(form.action, {
         method: 'POST',
         body: formData,
@@ -508,9 +531,9 @@
       });
 
       if (response.ok) {
-        form.style.display = 'none';
+        window.scrollTo(0, 0);
+        document.body.style.overflow = 'hidden';
         successScreen.classList.add('visible');
-        successScreen.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
         throw new Error('submit failed');
       }
