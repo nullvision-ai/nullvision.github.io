@@ -6,39 +6,43 @@
 <title>nullvision — briefing de projeto</title>
 <meta name="description" content="Conte sua ideia. A nullvision renderiza. Envie o briefing do seu projeto cinematic, motion ou design.">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
   body {
     background: #0a0a0a;
     color: #e8e4dc;
-    font-family: 'Space Grotesk', Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
     font-weight: 300;
     line-height: 1.6;
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
   }
+  img, svg { max-width: 100%; }
   a { color: inherit; }
-  .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 40px; width: 100%; }
 
   /* HEADER */
   header {
     border-bottom: 0.5px solid #1e1e1e;
     padding: 22px 0;
   }
-  .header-inner { display: flex; justify-content: space-between; align-items: center; }
-  .logo { display: flex; align-items: center; gap: 12px; }
-  .logo-mark { flex-shrink: 0; }
-  .wordmark { font-size: 20px; letter-spacing: 0.1em; font-weight: 400; }
+  .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo-mark { flex-shrink: 0; width: 42px; height: 42px; }
+  .wordmark { font-size: 24px; letter-spacing: 0.03em; font-weight: 700; }
   .wordmark span { color: #c0392b; }
-  .tagline-mini { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.14em; color: #555; margin-top: 2px; }
-  .nav-mono { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #444; text-transform: uppercase; }
+  .tagline-mini { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: #555; margin-top: 3px; }
+  .nav-mono { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.14em; color: #444; text-transform: uppercase; white-space: nowrap; }
 
   /* HERO */
-  .hero { padding: 90px 0 60px; text-align: left; }
-  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #c0392b; text-transform: uppercase; margin-bottom: 20px; }
-  .hero h1 { font-size: 44px; font-weight: 300; letter-spacing: 0.01em; line-height: 1.15; max-width: 640px; }
-  .hero h1 strong { font-weight: 500; }
-  .hero p { margin-top: 22px; font-size: 15px; color: #999; max-width: 480px; }
-  .hero-cta { margin-top: 34px; }
+  .hero { padding: 70px 0 56px; text-align: center; }
+  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #c0392b; text-transform: uppercase; margin-bottom: 20px; text-align: center; }
+  .hero h1 { font-size: clamp(28px, 6vw, 48px); font-weight: 500; letter-spacing: 0; line-height: 1.18; max-width: 640px; margin: 0 auto; word-wrap: break-word; }
+  .hero h1 strong { font-weight: 800; }
+  .hero p { margin: 20px auto 0; font-size: 15px; color: #999; max-width: 480px; }
+  .hero-cta { margin-top: 32px; text-align: center; }
   .btn-scroll {
     display: inline-flex; align-items: center; gap: 10px;
     background: #c0392b; color: #fff; border: none;
@@ -50,9 +54,9 @@
 
   /* SECTION GENERIC */
   section { padding: 56px 0; border-bottom: 0.5px solid #1e1e1e; }
-  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #444; text-transform: uppercase; margin-bottom: 28px; }
-  .section-title { font-size: 26px; font-weight: 400; margin-bottom: 10px; }
-  .section-sub { color: #888; font-size: 13px; max-width: 520px; margin-bottom: 34px; }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #444; text-transform: uppercase; margin-bottom: 28px; text-align: center; }
+  .section-title { font-size: 28px; font-weight: 600; margin-bottom: 10px; text-align: center; }
+  .section-sub { color: #888; font-size: 13.5px; max-width: 520px; margin: 0 auto 34px; text-align: center; }
 
   /* CATEGORY CARDS */
   .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -88,7 +92,7 @@
     border-radius: 8px;
     padding: 12px 14px;
     color: #e8e4dc;
-    font-family: 'Space Grotesk', Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
     font-size: 13.5px;
     outline: none;
     transition: border-color .15s ease;
@@ -135,7 +139,7 @@
   .success-screen { display: none; text-align: center; padding: 60px 0; }
   .success-screen.visible { display: block; }
   .success-screen .cat-dot { margin: 0 auto 20px; width: 14px; height: 14px; }
-  .success-screen h2 { font-size: 28px; font-weight: 400; margin-bottom: 14px; }
+  .success-screen h2 { font-size: 28px; font-weight: 600; margin-bottom: 14px; }
   .success-screen p { color: #999; font-size: 14px; max-width: 420px; margin: 0 auto; }
 
   footer {
@@ -146,6 +150,25 @@
 
   /* honeypot */
   .hp { position: absolute; left: -9999px; opacity: 0; }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .wrap { padding: 0 18px; }
+    header { padding: 14px 0; }
+    .logo-mark { width: 32px; height: 32px; }
+    .wordmark { font-size: 19px; }
+    .tagline-mini { display: none; }
+    .nav-mono { font-size: 8px; }
+    .hero { padding: 44px 0 40px; }
+    .hero h1 { max-width: 100%; }
+    .hero p { max-width: 100%; }
+    section { padding: 40px 0; }
+    .section-title { font-size: 22px; }
+    .section-sub { font-size: 12.5px; }
+    .cat-card { padding: 20px 18px; }
+    .submit-row { flex-direction: column; align-items: stretch; text-align: center; }
+    .btn-submit { width: 100%; }
+  }
 </style>
 </head>
 <body>
