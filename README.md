@@ -1,6 +1,6 @@
 # Landing page de briefing — nullvision
 
-Página única (`index.html`), sem dependências externas além de fontes do Google (carregam normal quando publicada — só não carregam aqui no ambiente de teste, sem internet). Cliente escolhe a categoria (Cinematic/Motion/Design), preenche o formulário (só nome e e-mail são obrigatórios, o resto é opcional/livre) e envia — o envio vai direto pro seu e-mail via [Formspree](https://formspree.io) (chave já configurada: `mgaevrln`).
+Página única (`index.html`), sem dependências externas além de fontes do Google (carregam normal quando publicada — só não carregam aqui no ambiente de teste, sem internet). Cliente escolhe a categoria (Cinematic/Motion/Design), preenche o formulário (só nome e e-mail são obrigatórios, o resto é opcional/livre) e envia — o envio vai direto pro e-mail da empresa via [Formspree](https://formspree.io) (chave já configurada: `mgaevdgg`). Uma cópia é encaminhada automaticamente pro Gmail pessoal do Matheus (configurado nas próprias configurações do Gmail da empresa) — é essa cópia que o Claude lê pra processar os briefings.
 
 ## Publicar no GitHub Pages (~5 min, sem conta técnica)
 
@@ -9,13 +9,13 @@ Página única (`index.html`), sem dependências externas além de fontes do Goo
 3. Nesse repositório, clique em **Add file → Upload files** e suba o arquivo `index.html` (direto na raiz do repositório, não dentro de subpasta).
 4. Vá em **Settings → Pages**. Em "Build and deployment", selecione **Deploy from a branch**, branch **main**, pasta **/ (root)**. Salve.
 5. Espere ~1 minuto. O GitHub mostra a URL pública, algo como `https://SEU-USUARIO.github.io/nullvision-briefing/`.
-6. Acesse essa URL, preencha o formulário de teste e envie. O Formspree manda um e-mail de **confirmação** pra `contato.mateusaraujom@gmail.com` na primeira submissão — precisa clicar no link de confirmação pra ativar o recebimento definitivo dos briefings.
+6. Acesse essa URL, preencha o formulário de teste e envie. O Formspree manda um e-mail de **confirmação** pro e-mail da empresa na primeira submissão — precisa clicar no link de confirmação pra ativar o recebimento definitivo dos briefings.
 
-Depois disso, é só divulgar esse link (bio do Instagram, WhatsApp, proposta comercial) — todo briefing enviado cai direto no seu e-mail, com o assunto `Novo briefing — [Categoria] — [Nome do projeto]`.
+Depois disso, é só divulgar esse link (bio do Instagram, WhatsApp, proposta comercial) — todo briefing enviado cai direto no e-mail da empresa, com o assunto `Novo briefing — [Categoria] — [Nome do projeto]`.
 
-## Como o Claude pode processar os briefings automaticamente
+## Como o Claude processa os briefings automaticamente
 
-Assim que os e-mails começarem a chegar, é possível pedir pro Claude (com o Gmail já conectado) buscar por assunto `Novo briefing —`, extrair as respostas e atualizar `docs/06_CLIENTES.md` / `docs/07_PROJETOS.md` sozinho — inclusive numa rotina automática (verificação diária, por exemplo). Isso ainda não está configurado; é um passo seguinte, a ativar quando você quiser.
+O e-mail da empresa encaminha automaticamente uma cópia de cada briefing pro Gmail pessoal do Matheus (Configurações do Gmail → Forwarding and POP/IMAP). O Claude lê essa cópia numa rotina automática, atualiza `docs/06_CLIENTES.md` / `docs/07_PROJETOS.md` e só notifica o Matheus quando chega algo novo — silencioso no resto do tempo.
 
 ## Editar o formulário depois
 
