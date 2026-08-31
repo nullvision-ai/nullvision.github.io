@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nullvision — brand identity v2.3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .nv-root { background: #0a0a0a; color: #e8e4dc; font-family: 'Poppins', sans-serif; padding: 0; }
+  .section { padding: 40px 36px; border-bottom: 0.5px solid #1e1e1e; }
+  .section-label { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 0.18em; color: #444; text-transform: uppercase; margin-bottom: 28px; }
+  .nv-header { background: #0a0a0a; padding: 36px; border-bottom: 0.5px solid #1e1e1e; display: flex; justify-content: space-between; align-items: center; }
+  .header-title { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 0.2em; color: #333; text-transform: uppercase; }
+  .header-version { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 10px; color: #c0392b; }
+
+  /* LOGO */
+  .logo-area { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
+  .logo-main { display: flex; align-items: center; gap: 20px; }
+  .logo-wordmark { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 34px; letter-spacing: 0.12em; color: #e8e4dc; }
+  .logo-wordmark span { color: #c0392b; }
+  .logo-tagline { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 11px; color: #555; letter-spacing: 0.16em; margin-top: -8px; }
+  .logo-tagline em { color: #c0392b; font-style: normal; }
+  .logo-variants { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+  .logo-handle { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 13px; color: #c0392b; letter-spacing: 0.06em; }
+
+  /* PALETTE */
+  .palette-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; }
+  .swatch { border-radius: 6px; overflow: hidden; }
+  .swatch-color { height: 60px; border-radius: 6px 6px 0 0; }
+  .swatch-info { padding: 8px 10px; background: #111; border-radius: 0 0 6px 6px; border: 0.5px solid #1e1e1e; border-top: none; }
+  .swatch-name { font-size: 11px; font-weight: 500; color: #e8e4dc; margin-bottom: 2px; }
+  .swatch-hex { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 10px; color: #555; }
+
+  /* TYPOGRAPHY */
+  .type-showcase { display: flex; flex-direction: column; gap: 24px; }
+  .type-row { display: flex; align-items: baseline; gap: 24px; padding-bottom: 24px; border-bottom: 0.5px solid #161616; }
+  .type-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .type-meta { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 10px; color: #444; min-width: 110px; flex-shrink: 0; }
+  .type-display { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: 0.08em; color: #e8e4dc; line-height: 1; }
+  .type-heading { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 20px; letter-spacing: 0.06em; color: #e8e4dc; }
+  .type-body { font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 14px; color: #888; line-height: 1.7; letter-spacing: 0.02em; max-width: 400px; }
+  .type-mono { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 12px; color: #c0392b; letter-spacing: 0.1em; }
+
+  /* TAGLINE */
+  .tagline-block { background: #111; border: 0.5px solid #1e1e1e; border-left: 2px solid #c0392b; border-radius: 0 10px 10px 0; padding: 24px 28px; margin-bottom: 20px; }
+  .tagline-en { font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 22px; letter-spacing: 0.1em; color: #e8e4dc; margin-bottom: 8px; }
+  .tagline-pt { font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 14px; color: #555; letter-spacing: 0.06em; }
+  .tagline-note { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 10px; color: #444; letter-spacing: 0.12em; margin-top: 24px; }
+
+  /* CATEGORIAS */
+  .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 500px) { .cat-grid { grid-template-columns: 1fr; } }
+  .cat-card { background: #111; border: 0.5px solid #1e1e1e; border-radius: 10px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .cat-card:hover { border-color: #2a2a2a; }
+  .cat-header { display: flex; align-items: center; gap: 10px; }
+  .cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .cat-name { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 0.12em; color: #e8e4dc; }
+  .cat-desc { font-size: 12px; color: #666; line-height: 1.55; }
+  .cat-examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .cat-tag { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 9px; padding: 3px 8px; border: 0.5px solid #2a2a2a; border-radius: 20px; color: #555; }
+
+  /* BIO */
+  .bio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 520px) { .bio-grid { grid-template-columns: 1fr; } }
+  .bio-card { background: #111; border: 0.5px solid #1e1e1e; border-radius: 10px; padding: 20px; }
+  .bio-platform { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 0.14em; color: #444; text-transform: uppercase; margin-bottom: 12px; }
+  .bio-handle-line { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 13px; color: #c0392b; margin-bottom: 14px; }
+  .bio-text { font-size: 13px; color: #888; line-height: 1.7; letter-spacing: 0.01em; }
+  .bio-text strong { color: #e8e4dc; font-weight: 400; }
+
+  /* CAPTIONS */
+  .caption-list { display: flex; flex-direction: column; gap: 16px; }
+  .caption-item { background: #111; border: 0.5px solid #1e1e1e; border-left: 2px solid #c0392b; border-radius: 0 8px 8px 0; padding: 16px 20px; }
+  .caption-tag { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.16em; color: #c0392b; text-transform: uppercase; margin-bottom: 8px; }
+  .caption-text { font-size: 13px; color: #aaa; line-height: 1.65; }
+
+  /* HASHTAGS */
+  .hashtag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 11px; padding: 5px 12px; border: 0.5px solid #2a2a2a; border-radius: 20px; color: #666; letter-spacing: 0.04em; }
+  .tag.accent { border-color: #c0392b; color: #c0392b; }
+
+  /* TOM */
+  .tone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .tone-grid { grid-template-columns: 1fr; } }
+  .tone-card { padding: 16px; background: #111; border: 0.5px solid #1e1e1e; border-radius: 8px; }
+  .tone-label { font-size: 11px; font-weight: 500; color: #c0392b; margin-bottom: 8px; letter-spacing: 0.06em; }
+  .tone-rule { font-size: 12px; color: #666; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="nv-root">
+
+  <div class="nv-header">
+    <span class="header-title">Nullvision — Brand Identity</span>
+    <span class="header-version">v2.5</span>
+  </div>
+
+  <!-- LOGO -->
+  <div class="section">
+    <div class="section-label">01 — Logotipo & tagline</div>
+    <div class="logo-area">
+      <div class="logo-main">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="22" stroke="#2a2a2a" stroke-width="0.5"/>
+          <circle cx="28" cy="28" r="14" stroke="#3a3a3a" stroke-width="0.5"/>
+          <circle cx="28" cy="28" r="6" fill="#c0392b"/>
+          <line x1="28" y1="6" x2="28" y2="14" stroke="#c0392b" stroke-width="0.8"/>
+          <line x1="28" y1="42" x2="28" y2="50" stroke="#c0392b" stroke-width="0.8"/>
+          <line x1="6" y1="28" x2="14" y2="28" stroke="#c0392b" stroke-width="0.8"/>
+          <line x1="42" y1="28" x2="50" y2="28" stroke="#c0392b" stroke-width="0.8"/>
+          <line x1="12.5" y1="12.5" x2="18.5" y2="18.5" stroke="#2a2a2a" stroke-width="0.5"/>
+          <line x1="43.5" y1="12.5" x2="37.5" y2="18.5" stroke="#2a2a2a" stroke-width="0.5"/>
+          <line x1="12.5" y1="43.5" x2="18.5" y2="37.5" stroke="#2a2a2a" stroke-width="0.5"/>
+          <line x1="43.5" y1="43.5" x2="37.5" y2="37.5" stroke="#2a2a2a" stroke-width="0.5"/>
+        </svg>
+        <div>
+          <div class="logo-wordmark">null<span>vision</span></div>
+          <div class="logo-tagline">we render what you <em>imagine</em></div>
+        </div>
+      </div>
+      <div class="logo-variants">
+        <span class="logo-handle">@nullvision</span>
+        <span style="font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:10px;color:#333;letter-spacing:0.12em">NV ◉</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAGLINE -->
+  <div class="section">
+    <div class="section-label">02 — Tagline</div>
+    <div class="tagline-block">
+      <div class="tagline-en">we render what you imagine.</div>
+      <div class="tagline-pt">o que você imagina, a gente renderiza.</div>
+    </div>
+    <div class="tagline-note">USE EM — bio, apresentações, stories de divulgação, rodapé de vídeo</div>
+  </div>
+
+  <!-- PALETTE -->
+  <div class="section">
+    <div class="section-label">03 — Paleta de cores</div>
+    <div class="palette-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0a0a0a;border:0.5px solid #1e1e1e;"></div>
+        <div class="swatch-info"><div class="swatch-name">Void</div><div class="swatch-hex">#0A0A0A</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#111111;"></div>
+        <div class="swatch-info"><div class="swatch-name">Deep</div><div class="swatch-hex">#111111</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1e1e1e;"></div>
+        <div class="swatch-info"><div class="swatch-name">Frame</div><div class="swatch-hex">#1E1E1E</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#e8e4dc;"></div>
+        <div class="swatch-info"><div class="swatch-name">Film</div><div class="swatch-hex">#E8E4DC</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#888888;"></div>
+        <div class="swatch-info"><div class="swatch-name">Ash</div><div class="swatch-hex">#888888</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#c0392b;"></div>
+        <div class="swatch-info"><div class="swatch-name">Signal</div><div class="swatch-hex">#C0392B</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIAS DE CONTEÚDO -->
+  <div class="section">
+    <div class="section-label">04 — Categorias de conteúdo</div>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <div class="cat-header">
+          <div class="cat-dot" style="background:#c0392b;"></div>
+          <div class="cat-name">◉ CINEMATIC</div>
+        </div>
+        <div class="cat-desc">Takes dramáticos, retratos, natureza, atmosfera cinematográfica. O estilo mais sombrio da marca.</div>
+        <div class="cat-examples">
+          <span class="cat-tag">live action</span>
+          <span class="cat-tag">retratos</span>
+          <span class="cat-tag">paisagem</span>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header">
+          <div class="cat-dot" style="background:#888;"></div>
+          <div class="cat-name">◉ MOTION</div>
+        </div>
+        <div class="cat-desc">Animações gráficas, logos animados, títulos, type motion. Forte para conteúdo de marca.</div>
+        <div class="cat-examples">
+          <span class="cat-tag">logo animation</span>
+          <span class="cat-tag">type</span>
+          <span class="cat-tag">UI motion</span>
+        </div>
+      </div>
+      <div class="cat-card" style="grid-column: 1 / -1;">
+        <div class="cat-header">
+          <div class="cat-dot" style="background:#e8e4dc;"></div>
+          <div class="cat-name">◉ DESIGN</div>
+        </div>
+        <div class="cat-desc">Apresentações, slides, motion graphics, mockups/protótipos, one-pagers e documentos institucionais. Da ideia à peça pronta, com a mesma identidade visual. Não é só slide estático: inclui animação de transição, storytelling de dados e handoff pra outros formatos.</div>
+        <div class="cat-examples">
+          <span class="cat-tag">apresentações</span>
+          <span class="cat-tag">motion graphics</span>
+          <span class="cat-tag">mockups</span>
+          <span class="cat-tag">documentos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPOGRAFIA -->
+  <div class="section">
+    <div class="section-label">05 — Tipografia</div>
+    <div class="type-showcase">
+      <div class="type-row">
+        <div class="type-meta">Display<br/>Poppins 700</div>
+        <div class="type-display">nullvision</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Heading<br/>Poppins 600</div>
+        <div class="type-heading">estúdio de vídeo gerado por IA</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Body<br/>Poppins 300</div>
+        <div class="type-body">qualquer estilo. qualquer tema. cinematográfico, motion, design — se existe na sua cabeça, a nullvision renderiza.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Accent<br/>Poppins 700</div>
+        <div class="type-mono">@nullvision — AI VIDEO STUDIO</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIOS -->
+  <div class="section">
+    <div class="section-label">06 — Bio dos perfis</div>
+    <div class="bio-grid">
+      <div class="bio-card">
+        <div class="bio-platform">Instagram</div>
+        <div class="bio-handle-line">@nullvision</div>
+        <div class="bio-text">
+          <strong>qualquer vídeo (ou material) que você imaginar.</strong><br/><br/>
+          cinematográfico · motion · design<br/>
+          gerado com IA — cada projeto sob medida.<br/><br/>
+          ◉ we render what you imagine<br/>
+          ↓ solicite o seu
+        </div>
+      </div>
+      <div class="bio-card">
+        <div class="bio-platform">TikTok</div>
+        <div class="bio-handle-line">@nullvision</div>
+        <div class="bio-text">
+          <strong>o vazio que cria.</strong><br/><br/>
+          vídeo e design com IA — cinematic, motion, design.<br/>
+          qualquer tema. qualquer estilo.<br/><br/>
+          encomende o seu 🔴<br/>
+          we render what you imagine.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPTIONS -->
+  <div class="section">
+    <div class="section-label">07 — Tom de legenda por categoria</div>
+    <div class="caption-list">
+      <div class="caption-item">
+        <div class="caption-tag">◉ Cinematic</div>
+        <div class="caption-text">a câmera que nunca existiu gravou o que ninguém viu.<br/>◉ nullvision</div>
+      </div>
+      <div class="caption-item">
+        <div class="caption-tag">◉ Motion</div>
+        <div class="caption-text">movimento tem intenção. cada frame, uma decisão.<br/>◉ nullvision — motion</div>
+      </div>
+      <div class="caption-item">
+        <div class="caption-tag">◉ Design</div>
+        <div class="caption-text">ideia organizada é ideia que convence.<br/>◉ nullvision — design</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HASHTAGS -->
+  <div class="section">
+    <div class="section-label">08 — Hashtags</div>
+    <div class="hashtag-cloud">
+      <span class="tag accent">#nullvision</span>
+      <span class="tag accent">#werenderwhatyouimagine</span>
+      <span class="tag accent">#AIvideo</span>
+      <span class="tag">#AIcinema</span>
+      <span class="tag">#motiondesign</span>
+      <span class="tag">#AIanimation</span>
+      <span class="tag">#videoIA</span>
+      <span class="tag">#seedance</span>
+      <span class="tag">#cinematicAI</span>
+      <span class="tag">#AIart</span>
+      <span class="tag">#AIfilm</span>
+      <span class="tag">#shortfilm</span>
+      <span class="tag">#visualstorytelling</span>
+      <span class="tag">#AIdesign</span>
+      <span class="tag">#pitchdeck</span>
+      <span class="tag accent">#filmnotfilm</span>
+    </div>
+  </div>
+
+  <!-- TOM DE VOZ -->
+  <div class="section" style="border-bottom:none;">
+    <div class="section-label">09 — Regras de tom de voz</div>
+    <div class="tone-grid">
+      <div class="tone-card">
+        <div class="tone-label">Faz</div>
+        <div class="tone-rule">Frases curtas. Minúsculas intencionais. Pausas com ponto final. Categoriza com ◉ antes do nome da série. Deixa o vídeo falar mais que o texto.</div>
+      </div>
+      <div class="tone-card">
+        <div class="tone-label">Não faz</div>
+        <div class="tone-rule">Emojis em excesso. "Incrível!", "Amei!". Explicar o que o vídeo mostra. Listar ferramentas usadas em todo post. Misturar categorias sem critério.</div>
+      </div>
+      <div class="tone-card">
+        <div class="tone-label">Personalidade</div>
+        <div class="tone-rule">Um estúdio que domina o que faz — não precisa se vender. Fria na forma, intensa no conteúdo. Ampla na oferta, precisa na execução.</div>
+      </div>
+      <div class="tone-card">
+        <div class="tone-label">Símbolo de marca</div>
+        <div class="tone-rule">◉ é o "olho nulo" — use como prefixo de categoria e assinatura final de posts. É o elemento mais reconhecível da identidade.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
